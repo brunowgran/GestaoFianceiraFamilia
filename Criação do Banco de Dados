@@ -1,0 +1,23 @@
+import sqlite3
+
+conn = sqlite3.connect('database.db')
+
+conn.execute('''
+CREATE TABLE members (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    name TEXT NOT NULL
+)
+''')
+
+conn.execute('''
+CREATE TABLE transactions (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    member_id INTEGER,
+    amount REAL,
+    date TEXT,
+    FOREIGN KEY (member_id) REFERENCES members (id)
+)
+''')
+
+conn.commit()
+conn.close()
